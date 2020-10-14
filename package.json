@@ -1,0 +1,54 @@
+{
+  "name": "todo-react",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://mastro-elfo.github.io/todo-react/",
+  "dependencies": {
+    "@material-ui/core": "^4.9.13",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "gh-pages": "^2.2.0",
+    "notistack": "^0.9.11",
+    "prop-types": "^15.7.2",
+    "ra-i18n-polyglot": "^3.8.5",
+    "ra-language-chinese": "^2.0.5",
+    "ra-language-english": "^3.8.5",
+    "ra-language-spanish": "^1.0.0",
+    "react": "^16.13.1",
+    "react-admin": "^3.8.5",
+    "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^8.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
