@@ -1,6 +1,22 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description.
+
+The application appeared based on the development of the project https://github.com/mastro-elfo/todo-react
+
+The application manages the list of http requests.
+
+The request can be sent to the server and the received response can be viewed.
+
+The list of requests can be downloaded from the file. Thus, a file is a collection of requests.
+
+You can use macros in your queries. An example macro: {resp[user].info}. The macro will be replaced by the value of the info field from the request response with the name user.
+
+### `Libraries used`
+
+material-ui, redux, thunk, axios, promise, upload file components.
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
