@@ -57,7 +57,7 @@ function scanWord (word, str, pos = 0) {
 }
 
 function substParam (str, items) {
-	let prm = str;
+	let prm = "";
 	let pos;
 	let itemField = {};
 	let itemName = {};
@@ -85,7 +85,11 @@ function substParam (str, items) {
 			itemFieldValue = JSON.parse(item.response);
 		}
 		if (itemField.value === 'req') {
-			itemFieldValue = item.value;
+			if (item.httpMethod.localeCompare('json', undefined, { sensitivity: 'accent' }) === 0) {
+				itemFieldValue = JSON.parse(item.value);
+			} else {
+				itemFieldValue = JSON.parse('{}');
+			}
 		}
 		prm = itemFieldValue[objField.value];
 	}
@@ -106,7 +110,7 @@ function substNestedParams (str, items, pos = 0) {
 			if (indCloseBrace !== -1) {
 				param = res.slice(pos - 1, indCloseBrace + 1);
 				param = substParam (param, items)
-				res = res.slice(0, pos - 1) + param + res.slice(indCloseBrace + 1);
+				res = res.slice(0, pos - 1) + (param === 'undefined' ? '' : param )+ res.slice(indCloseBrace + 1);
 			}
 		}
 	}

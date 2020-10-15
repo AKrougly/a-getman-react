@@ -1,8 +1,20 @@
 [
 	{
 		"uid": "f94a6d80-f19f-11ea-9cd3-6f1ad48bb161",
+		"name": "vars",
+		"value": "{\"baseURL\":\"https://randomuser.me/\"}",
+		"httpMethod": "JSON",
+		"time": "2020-10-15T10:10:00.000Z",
+		"response": "",
+		"error": "",
+		"sended": null,
+		"completed": false,
+		"deleted": false
+	},
+	{
+		"uid": "f94a6d80-f19f-11ea-9cd3-6f1ad48bb162",
 		"name": "user",
-		"value": "https://randomuser.me/api/",
+		"value": "{req[vars].baseURL}api/",
 		"httpMethod": "GET",
 		"time": "2020-10-05T17:10:00.000Z",
 		"response": "",
