@@ -9,6 +9,8 @@ import {
 	actionImportItemsSuccess,
 	actionImportItemsFailure,
 	//
+	actionExportItemsDo,
+	//
 	actionSendItemStarted,
 	actionSendItemSuccess,
 	actionSendItemFailure,
@@ -56,6 +58,12 @@ export function actionImportItems(file) {
 		};
 	
 		reader.readAsText(file);
+	};
+}
+
+export function actionExportItems(items) {
+	return dispatch => {
+		dispatch(actionExportItemsDo(items));
 	};
 }
 

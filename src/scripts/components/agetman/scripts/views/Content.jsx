@@ -13,6 +13,7 @@ export default function Content(props) {
   const handleAddItem = item => { props.addItem(item); };
   const handleChangeItem = item => { props.changeItem(item); };
   const handleImportItems = file => { props.importItems(file); };
+  const handleExportItems = () => { props.exportItems(props.items); };
   const handleSendItem = (item, items) => { props.sendItem(item, items); };
 
   return (
@@ -21,7 +22,9 @@ export default function Content(props) {
         filter={props.filter}
         onChange={handleFilter}
         onEnter={handleAddItem}
-        onImport={handleImportItems} />
+        onImport={handleImportItems}
+        onExport={handleExportItems}
+      />
       <ProgressBar
         showProgressBar={props.showProgressBar}
         items={props.items}

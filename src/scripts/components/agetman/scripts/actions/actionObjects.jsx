@@ -12,6 +12,7 @@ import {
   IMPORT_ITEMS_STARTED,
   IMPORT_ITEMS_SUCCESS,
   IMPORT_ITEMS_FAILURE,
+  EXPORT_ITEMS_DO,
 } from './types';
 import initialState from '../model/initialState';
 import { SendStatuses } from '../model/consts';
@@ -71,6 +72,11 @@ export const actionImportItemsSuccess = (items) => ({
 export const actionImportItemsFailure = (err) => ({
   type: IMPORT_ITEMS_FAILURE,
   error: err,
+});
+
+export const actionExportItemsDo = (items) => ({
+  type: EXPORT_ITEMS_DO,
+  items: items,
 });
 
 export const actionSendItemStarted = item => ({

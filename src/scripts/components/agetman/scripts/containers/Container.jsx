@@ -12,6 +12,7 @@ import {
 import {
   actionLoadState,
   actionImportItems,
+  actionExportItems,
   actionSendItem,
 } from '../api/apiAxios';
 
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch) => {
     addItem: (item) => dispatch(actionAddItem(item)),
     changeItem: (item) => dispatch(actionChangeItem(item)),
     importItems: (file) => dispatch(actionImportItems(file)),
+    exportItems: (items) => dispatch(actionExportItems(items)),
     sendItem: (item, items) => dispatch(actionSendItem(item, items)),
   };
 }

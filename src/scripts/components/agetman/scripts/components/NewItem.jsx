@@ -9,6 +9,7 @@ import {
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 import UploadFileButton from "./uploadFile/UploadFileButton";
+import DownloadStateButton from "./downloadState/DownloadStateButton";
 
 const ref = createRef();
 
@@ -16,7 +17,8 @@ export default function NewItem({
   filter = false,
   onEnter = () => {},
   onChange = () => {},
-  onImport = () => {}
+  onImport = () => {},
+  onExport = () => {},
 }) {
   const [value, setValue] = useState("");
 
@@ -61,6 +63,10 @@ export default function NewItem({
                 <UploadFileButton
                   disabled={filter || !!value.trim()}
                   onImport={onImport}
+                />
+                <DownloadStateButton
+                  disabled={filter}
+                  onExport={onExport}
                 />
               </InputAdornment>
             )
