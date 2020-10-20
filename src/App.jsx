@@ -1,10 +1,10 @@
 import React from "react";
 
-import ErrorWrapper from "./scripts/components/ErrorWrapper";
-import ThemeWrapper from "./scripts/components/ThemeWrapper";
-import NotifyWrapper from "./scripts/components/NotifyWrapper";
+import ErrorWrapper from "./appContainer/ErrorWrapper";
+import ThemeWrapper from "./appContainer/ThemeWrapper";
+import NotifyWrapper from "./appContainer/NotifyWrapper";
 
-import Router from "./scripts/components/Router";
+import Router from "./appContainer/Router";
 
 export default function App() {
   return (

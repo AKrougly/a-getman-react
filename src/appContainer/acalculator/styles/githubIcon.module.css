@@ -1,0 +1,17 @@
+.github {
+	 fill: #fff;
+	 left: 50%;
+	 margin-top: 50px;
+	 position: relative;
+	 transform: translate(0, -50%);
+}
+ .github span {
+	 visibility: hidden;
+}
+ .github:active {
+	 left: 50.1%;
+	 top: 1px;
+}
+ .github:hover {
+	 fill: #a9b9f1;
+}
