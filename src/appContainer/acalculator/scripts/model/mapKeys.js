@@ -114,7 +114,7 @@ const MapKeys = [
     command: 'deleteAction'
   },
   {
-    key: '=',
+    key: 'Enter',
     label: '=',
     type: 'result',
     command: 'resultAction'

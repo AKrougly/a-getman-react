@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch) => {
     switchOperatorAction: (value, data) => { _commonActions({ constants: [constants.SWITCH_OPERATOR, constants.CALCULATED], dispatch, value, data }); },
     percentAction: (value, data) => { _commonActions({ constants: [constants.PERCENT, constants.CALCULATED], dispatch, value, data }) },
     operatorAction: (value, data) => { _operatorAction(dispatch, value, data); },
-    resultAction: (value, data) => { _resultAction(dispatch, value, data); },
+    resultAction: (value, data) => { _resultAction(dispatch, '='/*value*/, data); },
     clearAction: (value, data) => { _dispatchAction(dispatch, constants.CLEAR, { value, data }); },
 //    deleteAction: (value, data) => { _dispatchAction(dispatch, constants.DEL, { value, data }); },
     deleteAction: (value, data) => { _commonActions({ constants: [constants.DEL, constants.CALCULATED], dispatch, value, data }); },
