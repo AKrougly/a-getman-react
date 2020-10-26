@@ -70,7 +70,7 @@ export function actionExportItems(items) {
 export function actionSendItem(item, items) {
 	return dispatch => {
 		dispatch(actionSendItemStarted(item));
-		const req = substParams(item.value, items);
+		const req = substParams(item, items);
 		axios
 		.get(req)
 		.then(res => {

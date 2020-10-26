@@ -56,61 +56,77 @@ function scanWord (word, str, pos = 0) {
 	return ind;
 }
 
-function substParam (str, items) {
+function substParam (str, item, items) {
 	let prm = "";
 	let pos;
 	let itemField = {};
 	let itemName = {};
 	let objField = {};
-	let item = {};
+	let itemByName = {};
 	let itemFieldValue = {};
 
 	pos = scanDelimeter('{', str);
 	pos = scanWord(itemField, str, pos);
-	pos = scanDelimeter('[', str, pos);
-	pos = scanWord(itemName, str, pos);
-	pos = scanDelimeter(']', str, pos);
+
+	if (str.charAt(pos) === '[') {
+		pos = scanDelimeter('[', str, pos);
+		pos = scanWord(itemName, str, pos);
+		pos = scanDelimeter(']', str, pos);
+	}
 
 	if (str.charAt(pos) === '.') {
 		pos = scanDelimeter('.', str, pos);
+		pos = scanWord(objField, str, pos);
 	}
-
-	pos = scanWord(objField, str, pos);
 
 	pos = scanDelimeter('}', str, pos);
 
-	item = findItemByName(items, itemName);
-	if (!isEmptyObj(item)) {
-		if (itemField.value === 'resp') {
-			itemFieldValue = JSON.parse(item.response);
-		}
-		if (itemField.value === 'req') {
-			if (item.httpMethod.localeCompare('json', undefined, { sensitivity: 'accent' }) === 0) {
-				itemFieldValue = JSON.parse(item.value);
-			} else {
-				itemFieldValue = JSON.parse('{}');
+	if (!isEmptyObj(itemName) && ((itemField.value === 'req') || (itemField.value === 'resp'))) {
+		itemByName = findItemByName(items, itemName);
+		if (!isEmptyObj(itemByName)) {
+			if (itemField.value === 'resp') {
+				itemFieldValue = JSON.parse(itemByName.response);
+			}
+			if (itemField.value === 'req') {
+				if (itemByName.httpMethod.localeCompare('json', undefined, { sensitivity: 'accent' }) === 0) {
+					itemFieldValue = JSON.parse(itemByName.value);
+				} else {
+					itemFieldValue = JSON.parse('{}');
+				}
 			}
 		}
-		prm = itemFieldValue[objField.value];
 	}
+
+	if (itemField.value === 'this') {
+		if (objField.value === 'name') {
+			itemFieldValue[objField.value] = item.name;
+		}
+		else {
+			itemFieldValue[objField.value] = {};
+		}
+	}
+
+	prm = itemFieldValue[objField.value];
 
 	return prm;
 }
 
-function substNestedParams (str, items, pos = 0) {
+function substNestedParams (str, item, items, pos = 0) {
 	let res = str;
-	let param = '';
-	let indCloseBrace = -1;
-	let indOpenBrace = res.indexOf('{', pos);
-	indCloseBrace = res.indexOf('}', pos);
-	if ((indOpenBrace !== -1) && (indCloseBrace !== -1) && (indOpenBrace < indCloseBrace)) {
-		res = substNestedParams(res, items, indOpenBrace + 1);
-	} else {
-		if (pos > 0) {
-			if (indCloseBrace !== -1) {
-				param = res.slice(pos - 1, indCloseBrace + 1);
-				param = substParam (param, items)
-				res = res.slice(0, pos - 1) + (param === 'undefined' ? '' : param )+ res.slice(indCloseBrace + 1);
+	if (!isEmpty(res)) {
+		let param = '';
+		let indCloseBrace = -1;
+		let indOpenBrace = res.indexOf('{', pos);
+		indCloseBrace = res.indexOf('}', pos);
+		if ((indOpenBrace !== -1) && (indCloseBrace !== -1) && (indOpenBrace < indCloseBrace)) {
+			res = substNestedParams(res, item, items, indOpenBrace + 1);
+		} else {
+			if (pos > 0) {
+				if (indCloseBrace !== -1) {
+					param = res.slice(pos - 1, indCloseBrace + 1);
+					param = substParam (param, item, items)
+					res = res.slice(0, pos - 1) + (param === 'undefined' ? '' : param )+ res.slice(indCloseBrace + 1);
+				}
 			}
 		}
 	}
@@ -118,13 +134,13 @@ function substNestedParams (str, items, pos = 0) {
 	return res;
 }
 
-export default function substParams (str, items, pos = 0) {
-	let res = str;
-	let indOpenBrace = res.indexOf('{', pos);
+export default function substParams (item, items, pos = 0) {
+	let value = item.value;
+	let indOpenBrace = value.indexOf('{', pos);
 	while (indOpenBrace !== -1) {
-		res = substNestedParams (res, items, pos);
-		indOpenBrace = res.indexOf('{', pos);
+		value = substNestedParams (value, item, items, pos);
+		indOpenBrace = value.indexOf('{', pos);
 	}
 
-	return res;
+	return value;
 }
