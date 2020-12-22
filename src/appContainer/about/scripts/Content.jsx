@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  ListSubheader
+  ListSubheader,
 } from "@material-ui/core";
 
 import EmailIcon from "@material-ui/icons/Email";
@@ -15,13 +15,18 @@ import Markdown from "../../Markdown";
 
 export default function AboutContent() {
   const APPVERSION = "0.1.0";
-  const APPNAME = "ToDo React";
-  const APPDESCRIPTION = "Simple To-Do list build with react";
+  const APPNAME = "aGetMan React";
+  const APPDESCRIPTION = "Manager of http requests build with react";
   const DEVELOPERS = [
     {
       name: "mastro-elfo",
       email: "francesco.209@gmail.com",
       role: "Main Developer"
+    },
+    {
+      name: "Anton Krougly",
+      email: "BigTree@tut.by",
+      role: "Core Developer"
     }
   ];
 
@@ -72,4 +77,4 @@ export default function AboutContent() {
 const source = `
 ### How it's made
 
-This application is made with React and MaterialUI.`;
+This application is made with React (redux, thunk, axios, filereader, localStorage) and MaterialUI.`;

@@ -147,7 +147,7 @@ export default function ToDoItem({item,  onChange, onSend }) {
             <MenuItem value={HttpMethods.JSON}>Json</MenuItem>
           </Select>
         </FormControl>
-        <TextField id={name} value={name} label="name" name="Name" margin="normal" onChange={handleChangeName} />
+        <TextField id={name} value={name} label="name" name="Name" onChange={handleChangeName} />
         {edit ? (
           <TextField
             autoFocus
