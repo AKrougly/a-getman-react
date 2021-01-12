@@ -1,3 +1,4 @@
+/*
 function IsJsonString(jsonData) {
 	if (/^[\],:{}\s]*$/
 		.test(jsonData
@@ -11,7 +12,7 @@ function IsJsonString(jsonData) {
 		return false;
 	}
 }
-	
+*/	
 function isEmpty(str) {
 	return (!str || 0 === str.trim().length);
 }
@@ -27,11 +28,11 @@ function findItemByName (items, itemName) {
 
 	if (itemByName.length === 0) {
 		console.log('Не найден элемент с именем:' + itemName.value);
-		return {};
+		throw new Error('Не найден элемент с именем:' + itemName.value);
 	}
 	if (itemByName.length > 1) {
 		console.log('У элементов одинаковое имя:' + itemName.value);
-		return {};
+		throw new Error('У элементов одинаковое имя:' + itemName.value);
 	}
 	return itemByName[0];
 }
@@ -81,28 +82,20 @@ function substParam (str, item, items) {
 
 	pos = scanDelimeter('}', str, pos);
 
-	if (!isEmptyObj(itemName) && ((itemField.value === 'req') || (itemField.value === 'resp'))) {
+	itemFieldValue[objField.value] = {};
+
+	if ((itemField.value === 'this') && (objField.value === 'name')) {
+		itemFieldValue[objField.value] = item.name;
+	} else if (((itemField.value === 'req') || (itemField.value === 'resp')) && !isEmptyObj(itemName)) {
 		itemByName = findItemByName(items, itemName);
 		if (!isEmptyObj(itemByName)) {
 			if (itemField.value === 'resp') {
 				itemFieldValue = JSON.parse(itemByName.response);
-			}
-			if (itemField.value === 'req') {
+			} else if (itemField.value === 'req') {
 				if (itemByName.httpMethod.localeCompare('json', undefined, { sensitivity: 'accent' }) === 0) {
 					itemFieldValue = JSON.parse(itemByName.value);
-				} else {
-					itemFieldValue = JSON.parse('{}');
 				}
 			}
-		}
-	}
-
-	if (itemField.value === 'this') {
-		if (objField.value === 'name') {
-			itemFieldValue[objField.value] = item.name;
-		}
-		else {
-			itemFieldValue[objField.value] = {};
 		}
 	}
 

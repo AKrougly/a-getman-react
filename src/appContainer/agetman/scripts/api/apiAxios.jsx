@@ -69,15 +69,20 @@ export function actionExportItems(items) {
 
 export function actionSendItem(item, items) {
 	return dispatch => {
-		dispatch(actionSendItemStarted(item));
-		const req = substParams(item, items);
-		axios
-		.get(req)
-		.then(res => {
-			dispatch(actionSendItemSuccess(item, res));
-		})
-		.catch(err => {
+		try {
+			dispatch(actionSendItemStarted(item));
+
+			const req = substParams(item, items);
+			axios
+			.get(req)
+			.then(res => {
+				dispatch(actionSendItemSuccess(item, res));
+			})
+			.catch(err => {
+				dispatch(actionSendItemFailure(item, err));
+			});
+		} catch (err) {
 			dispatch(actionSendItemFailure(item, err));
-		});
+		}
 	};
 }
