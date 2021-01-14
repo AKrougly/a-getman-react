@@ -97,6 +97,8 @@ function substParam (str, item, items) {
 				}
 			}
 		}
+	} else {
+		throw new Error("Undefined macro-param:" + str);
 	}
 
 	prm = itemFieldValue[objField.value];
@@ -106,21 +108,29 @@ function substParam (str, item, items) {
 
 function substNestedParams (str, item, items, pos = 0) {
 	let res = str;
-	if (!isEmpty(res)) {
+	if (!isEmpty(res) && (pos <= res.length)) {
 		let param = '';
 		let indCloseBrace = -1;
 		let indOpenBrace = res.indexOf('{', pos);
-		indCloseBrace = res.indexOf('}', pos);
-		if ((indOpenBrace !== -1) && (indCloseBrace !== -1) && (indOpenBrace < indCloseBrace)) {
-			res = substNestedParams(res, item, items, indOpenBrace + 1);
-		} else {
-			if (pos > 0) {
-				if (indCloseBrace !== -1) {
-					param = res.slice(pos - 1, indCloseBrace + 1);
-					param = substParam (param, item, items)
-					res = res.slice(0, pos - 1) + (param === 'undefined' ? '' : param )+ res.slice(indCloseBrace + 1);
-				}
+		if (indOpenBrace !== -1) {
+			indCloseBrace = res.indexOf('}', indOpenBrace);
+			if (indCloseBrace === -1) {
+				throw new Error('Missing macro-param\'s closed brace after pos:' + indOpenBrace);
 			}
+
+			res = substNestedParams(res, item, items, indOpenBrace + 1);
+		}
+		if (indOpenBrace !== -1) {
+			indCloseBrace = res.indexOf('}', indOpenBrace);
+			if (indCloseBrace === -1) {
+				throw new Error('Missing macro-param\'s closed brace after pos:' + indOpenBrace);
+			}
+			param = res.slice(indOpenBrace, indCloseBrace + 1);
+			console.log('param:' + param);
+			param = substParam (param, item, items)
+			console.log('param:' + param);
+			res = res.slice(0, indOpenBrace) + (param === 'undefined' ? '' : param) + res.slice(indCloseBrace + 1);
+			console.log('res:' + res);
 		}
 	}
 
