@@ -14,7 +14,7 @@ export default function Content(props) {
   const handleChangeItem = item => { props.changeItem(item); };
   const handleImportItems = file => { props.importItems(file); };
   const handleExportItems = () => { props.exportItems(props.items); };
-  const handleSendItem = (item, items) => { props.sendItem(item, items); };
+  const handleSendItem = (item, items) => { item.httpMethod === 'GET' && props.sendItem(item, items); };
 
   return (
     <BoxContainer>

@@ -51,6 +51,21 @@ const useStyle = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 60,
   },
+  responseFailure: {
+    color: "red",
+  },
+  responseSuccess: {
+    color: "primary",
+  },
+  expandEmptyResponse: {
+    color: "lightgray",
+  },
+  expandFailureResponse: {
+    color: "red",
+  },
+  expandSuccessResponse: {
+    color: "primary",
+  },
 }));
 
 // look: https://stackoverflow.com/questions/62391474/have-two-secondary-action-elements-in-a-list
@@ -127,6 +142,8 @@ export default function ToDoItem({item,  onChange, onSend }) {
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
+            [classes.expandFailureResponse]: !expanded && (sended === SendStatuses.SEND_FAILURE),
+            [classes.expandEmptyResponse]: !expanded && ((response === "") && (error === "")),
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -180,7 +197,14 @@ export default function ToDoItem({item,  onChange, onSend }) {
         )}
       </ListItemWithWiderSecondaryAction>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <TextField fullWidth value={sended === SendStatuses.SEND_FAILURE ? error : response} />
+        <TextField
+          fullWidth
+          value={sended === SendStatuses.SEND_FAILURE ? error : response}
+          error={sended === SendStatuses.SEND_FAILURE ? true : false }
+          InputProps={{
+            className: sended === SendStatuses.SEND_FAILURE ? classes.responseFailure : classes.responseSuccess
+          }}
+        />
       </Collapse>
     </List>
   );
