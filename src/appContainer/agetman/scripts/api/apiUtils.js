@@ -48,7 +48,7 @@ function scanDelimeter (delim, str, pos = 0) {
 
 function scanWord (word, str, pos = 0) {
 	let ind = pos;
-	while (str.charAt(ind).match(/[-a-z_]/i)) {
+	while (str.charAt(ind).match(/[-a-z_0-9]+/i)) {
 		ind++;
 	}
 
@@ -128,9 +128,7 @@ function substNestedParams (str, item, items, pos = 0) {
 			param = res.slice(indOpenBrace, indCloseBrace + 1);
 			console.log('param:' + param);
 			param = substParam (param, item, items)
-			console.log('param:' + param);
 			res = res.slice(0, indOpenBrace) + (param === 'undefined' ? '' : param) + res.slice(indCloseBrace + 1);
-			console.log('res:' + res);
 		}
 	}
 

@@ -1,3 +1,5 @@
+import { v1 as uuid } from 'uuid';
+
 import { HttpMethods } from '../model/consts';
 import {
   LOAD_STATE,
@@ -56,7 +58,10 @@ const items = (state = [], action) => {
         itemAction(t, action)
       );
     case IMPORT_ITEMS_SUCCESS:
-      return action.items;
+      //return action.items;
+      return action.items.map((item, idx) => {
+        return { ...item, uid: uuid(), };
+      });
     case EXPORT_ITEMS_DO:
       var text = JSON.stringify(state, null, '  ')/*.replace(/\\/g, '')*/;
   		navigator.clipboard.writeText(text);

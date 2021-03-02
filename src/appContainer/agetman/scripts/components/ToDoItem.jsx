@@ -76,7 +76,7 @@ const ListItemWithWiderSecondaryAction = withStyles({
 })(ListItem);
 
 export default function ToDoItem({item,  onChange, onSend }) {
-  const { name, value, response, error, completed, deleted, sended } = item;
+  const { uid, name, value, response, error, completed, deleted, sended } = item;
 
   const [edit, setEdit] = useState(false);
   const [snackbar, setSnackbar] = useState();
@@ -164,7 +164,7 @@ export default function ToDoItem({item,  onChange, onSend }) {
             <MenuItem value={HttpMethods.JSON}>Json</MenuItem>
           </Select>
         </FormControl>
-        <TextField id={name} value={name} label="name" name="Name" onChange={handleChangeName} />
+        <TextField id={uid} value={name} label="name" name="Name" onChange={handleChangeName} />
         {edit ? (
           <TextField
             autoFocus
