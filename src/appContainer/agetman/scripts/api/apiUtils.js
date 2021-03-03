@@ -90,6 +90,9 @@ function substParam (str, item, items) {
 		itemByName = findItemByName(items, itemName);
 		if (!isEmptyObj(itemByName)) {
 			if (itemField.value === 'resp') {
+				if (isEmpty(itemByName.response)) {
+					throw new Error(itemField.value+'['+itemName.value+'] - empty');			
+				}
 				itemFieldValue = JSON.parse(itemByName.response);
 			} else if (itemField.value === 'req') {
 				if (itemByName.httpMethod.localeCompare('json', undefined, { sensitivity: 'accent' }) === 0) {
@@ -102,6 +105,8 @@ function substParam (str, item, items) {
 	}
 
 	prm = itemFieldValue[objField.value];
+
+	console.log(str+'='+prm);
 
 	return prm;
 }
@@ -126,7 +131,6 @@ function substNestedParams (str, item, items, pos = 0) {
 				throw new Error('Missing macro-param\'s closed brace after pos:' + indOpenBrace);
 			}
 			param = res.slice(indOpenBrace, indCloseBrace + 1);
-			console.log('param:' + param);
 			param = substParam (param, item, items)
 			res = res.slice(0, indOpenBrace) + (param === 'undefined' ? '' : param) + res.slice(indCloseBrace + 1);
 		}
