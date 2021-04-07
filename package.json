@@ -1,8 +1,8 @@
 {
-  "name": "todo-react",
+  "name": "a-getman",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://mastro-elfo.github.io/todo-react/",
+  "homepage": "https://github.com/AKrougly/a-getman-react",
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
@@ -29,7 +29,9 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "uuid": "^8.0.0"
+    "typesafe-actions": "^5.1.0",
+    "uuid": "^8.0.0",
+    "web-vitals": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
