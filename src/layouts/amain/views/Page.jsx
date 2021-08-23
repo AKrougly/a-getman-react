@@ -5,13 +5,13 @@ import Header from "./Header";
 import Content from "./Content";
 import Drawer from "./Drawer";
 
-export default function View(props) {
+export default function Page(props) {
 
   const [open, setOpen] = useState(false);
 
   return (
     <PageTemplate
-      Header={<Header onOpen={() => setOpen(true)} />}
+      Header={<Header props={props} onOpen={() => setOpen(true)} />}
       Drawer={
         <Drawer
           {...props}

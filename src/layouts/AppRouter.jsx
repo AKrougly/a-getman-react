@@ -13,8 +13,8 @@ import ErrorWrapper from "./ErrorWrapper";
 import NotifyWrapper from "./NotifyWrapper";
 import AMain from "./amain/views/Page";
 import ACalculator from "./acalculator/ProviderReducer";
-import APalette from "./apalette/container/Container";
-import About from "./about/Router";
+import APalette from "./apalette/views/Page";
+import About from "./about/Page";
 
 const routeList = [
   // {path: '', component: RouterComponent, [exact]}

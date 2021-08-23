@@ -139,8 +139,8 @@ const DrawerItem = ({ type, title, href, Icon }) => {
         title={title}
         onClick={
           isExternal
-            ? () => window.open(href)
-            : isLink
+          ? () => window.open(href)
+          : isLink
             ? () => push(href)
             : null
         }
