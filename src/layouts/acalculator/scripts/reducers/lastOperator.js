@@ -1,9 +1,9 @@
-import { NUM, COMMA, OPERATOR, CLEAR, DEL } from '../actions/constants';
+import { NUM, COMMA, OPERATOR, CLEAR, DEL, SWITCH_OPERATOR } from '../actions/constants';
 
 function lastOperator(state = '', action) {
   let output = state;
 
-  if ((action.type === NUM) || (action.type === COMMA)) {
+  if ((action.type === NUM) || (action.type === COMMA) || (action.type === SWITCH_OPERATOR)) {
     const { lastKey } = action.data;
     if (lastKey === '=') {
       output = '';

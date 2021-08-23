@@ -1,10 +1,10 @@
-import { NUM,  COMMA, OPERATOR, CLEAR, DEL } from '../actions/constants';
+import { NUM,  COMMA, OPERATOR, CLEAR, DEL, SWITCH_OPERATOR } from '../actions/constants';
 import helper from '../model/helper';
 
 function displayHistory(state = '', action) {
   let output = state;
 
-  if ((action.type === NUM) || (action.type === COMMA)) {
+  if ((action.type === NUM) || (action.type === COMMA) || (action.type === SWITCH_OPERATOR)) {
     if (action.data.lastKey === '=') {
       output = '';
     }

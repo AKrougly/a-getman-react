@@ -2,16 +2,16 @@
   left: 50%;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%) translateX(-50%);
 
   &__content {
     border-radius: 8px;
     box-shadow: 0 6px 17px 0 rgba(0, 0, 0, .21);
-    height: 88vh;
+    height: 70vh;
     margin: 0 auto;
     overflow: hidden;
-    width: 95vw;
+    width: 30vw;
   }
 }
 

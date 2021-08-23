@@ -41,6 +41,7 @@ function _keyUpAction(key, props) {
     if (key === elmt.key) {
       props[elmt.command](key, { lastKey, lastOperator, storedValue, displayValue, displayHistory, calculated });
     }
+    return null;
   });
 
   return false;
