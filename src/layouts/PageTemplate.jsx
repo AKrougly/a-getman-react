@@ -87,7 +87,7 @@ const PageTemplate = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <CssBaseline />
       <Fragment>
         <NoPrint>

@@ -42,7 +42,7 @@ const LISTS = [
       {
         type: "item",
         title: "Github",
-        href: "https://github.com/mastro-elfo/todo-react",
+        href: "https://github.com/AKrougly/a-getman-react",
         Icon: GitHubIcon
       },
     ]
